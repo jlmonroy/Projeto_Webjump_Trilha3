@@ -31,8 +31,7 @@ Dado('prossigo para o checkout e preencho o formulario de entrega') do
   select "Brazil", :from => "country_id"
   select "São Paulo", :from => "region_id"
   find(:xpath, "//input[@name='telephone']").set "(11) 976160727"
-  sleep 3
-  click_button "Next"
+  find(:xpath, "//span[text()='Next']").click
 end
 
 Quando('realizo o pagamento') do
