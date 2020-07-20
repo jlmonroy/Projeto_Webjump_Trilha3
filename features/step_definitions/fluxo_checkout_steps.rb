@@ -1,8 +1,8 @@
 Dado('que eu acesso a minha conta') do
   visit 'https://magento.nublue.co.uk/customer/account/login/referer/aHR0cHM6Ly9tYWdlbnRvLm51Ymx1ZS5jby51ay9jdXN0b21lci9hY2NvdW50L2xvZ291dFN1Y2Nlc3Mv/'
   
-  find('#email').set 'roni_cost@example.com'
-  find('#pass').set 'roni_cost3@example.com'
+  find('#email').set $email
+  find('#pass').set 'Teste@246212'
   click_button "Sign In"
   assert_text('My Account', wait:10)
 end
@@ -10,13 +10,11 @@ end
 Dado('realizo a busca do produto {string} e adiciono ao produto o carrinho') do |string|
   find(:xpath, "//input[@id='search']").set "backpack"
   find(:xpath, "//input[@id='search']").send_keys :enter
-  expect(page).to have_content 'backpack'
   first(:xpath, "//img[@class='product-image-photo']").click
-  expect(page).to have_content 'Driven Backpack'
   click_button "Add to Cart"
   expect(page).to have_content 'You added'
   find(:xpath, "//span[@class='counter qty']").click
-  assert_text('Proceed to Checkout', wait:10)
+  assert_text('Qty', wait:10)
   assert_text('View and Edit Cart', wait:10)
   find(:xpath, "//button[@class='action primary checkout']").click
 
@@ -31,7 +29,9 @@ Dado('prossigo para o checkout e preencho o formulario de entrega') do
   select "Brazil", :from => "country_id"
   select "São Paulo", :from => "region_id"
   find(:xpath, "//input[@name='telephone']").set "(11) 976160727"
-  find(:xpath, "//span[text()='Next']").click
+  page.has_no_selector?(:xpath, "//div[@class='loading-mask']")
+  find(:xpath, "//input[@value='flatrate_flatrate']").click
+  click_button "Next"
 end
 
 Quando('realizo o pagamento') do
