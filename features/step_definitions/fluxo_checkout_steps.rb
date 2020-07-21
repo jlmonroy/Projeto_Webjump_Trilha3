@@ -11,6 +11,7 @@ Dado('realizo a busca do produto {string} e adiciono ao produto o carrinho') do 
   find(:xpath, "//input[@id='search']").set(produto).send_keys :enter 
   first(:xpath, "//img[@class='product-image-photo']").click
 
+  assert_text('IN STOCK', wait:10)
   click_button "Add to Cart"
   expect(page).to have_content 'You added'
   find(:xpath, "//span[@class='counter qty']").click
