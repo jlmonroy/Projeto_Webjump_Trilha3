@@ -9,7 +9,12 @@ end
 
 After do |scn|
     binding.pry if scn.failed? && ENV['debug']
-        
+    
+    # Setting Screenshot
+    temp_shot = page.save_screenshot('results/temp_shot.png')
+    screenshot = Base64.encode64(File.open(temp_shot, 'rb').read)
+    embed(screenshot, 'image/png', 'Screenshot')
+
     # Set reset session hook
     page.execute_script('sessionStorage.clear()') 
     Capybara.current_session.driver.quit
