@@ -11,7 +11,19 @@ Cucumber - Versão 4.1.0
 Git - Versão 2.27.0
 
 Criados 2 cenários:
-    - Criação de um usuário na plataforma de compra do Magento.
+    - Criação de um usuário na plataforma de compra do Magento 2 (Luma).
     - Realização de um pedido com sucesso do login ao checkout.
-    
+
+Instalação Ruby e dependências através dos comandos:
+
+    rvm install ruby (>2.5.0)
+    gem install bundler
+    add do driver do chrome na gem
+
+Execução dos cenários acima através do terminal com o comando:
+
+    cucumber (execução de todos os cenários)
+    cucumber -t @Usuario (execução do cenário 1 através da tag)
+    cucumber -t @checkout (execução do cenário 2 através da tag)
+
 Verificação da execução através do relatório.
