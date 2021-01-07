@@ -1,8 +1,8 @@
 #language:pt
-@Usuario
-Funcionalidade: Criar usuário da plataforma
+  @Usuario
+    Funcionalidade: Criar usuário da plataforma
 
-    Cenario: Criando usuario
+      Cenario: Criando usuario
 
         Dado Que eu acesso a página principal
         Dado Que eu acesso a página de cadastro

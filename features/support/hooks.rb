@@ -1,13 +1,19 @@
 require 'report_builder'
 
-Before do
+  Before do
+    @access = Access.new
+    @cadastro = Cadastro.new
+    @checkout = Checkout.new
+    @payment = Payment.new
+    @navigation = Navigation.new
+
     Capybara.current_session.driver.browser.manage.delete_all_cookies
     window = Capybara.current_session.current_window
     window.resize_to(1200, 1200)
     window.maximize
-end
+  end
 
-After do |scn|
+  After do |scn|
     binding.pry if scn.failed? && ENV['debug']
     
     # Setting Screenshot
@@ -19,15 +25,16 @@ After do |scn|
     page.execute_script('sessionStorage.clear()') 
     Capybara.current_session.driver.quit
     @session.driver.quit unless @session.nil?
-end
+  end
 
-at_exit do
+  at_exit do
     ReportBuilder.configure do |config|
-      config.input_path = 'results/report.json'
-      config.report_path = 'relatório de teste'
-      config.report_types = %i[html]
-      config.report_title = 'Relatório dos testes'
-      config.additional_info = { 'Navegador' => 'Web' }
-    end
-    ReportBuilder.build_report
+    config.input_path = 'results/report.json'
+    config.report_path = 'relatório de teste'
+    config.report_types = %i[html]
+    config.report_title = 'Relatório dos testes'
+    config.additional_info = { 'Navegador' => 'Web' }
+  end
+  
+  ReportBuilder.build_report
 end
